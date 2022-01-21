@@ -8,8 +8,10 @@ const createVApp = (count) => createElement('div', {
     dataCount: count
   },
   children: [
+    // tmp note: every second re-render input as well, so we cant write anything in input tag XD
+    createElement('input'),
     String(count),
-    createElement('img',{
+    createElement('img', {
       attrs: {
         src: 'https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif'
       }
@@ -21,6 +23,11 @@ let count = 0
 const vApp = createVApp(count)
 const $app = render(vApp)
 
-mount($app, document.getElementById('app'))
+let $rootEl = mount($app, document.getElementById('app'))
+
+setInterval(() => {
+  count++
+  $rootEl = mount(render(createVApp(count)), $rootEl)
+}, 1000)
 
 console.log($app)
