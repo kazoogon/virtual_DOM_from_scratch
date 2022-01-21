@@ -1,5 +1,9 @@
+/**
+ * create actual DOM
+ * @param vNode
+ * @returns {*}
+ */
 const render = (vNode) => {
-  console.log(vNode)
   const $el = document.createElement(vNode.tagName)
 
   // set attributes
@@ -12,7 +16,6 @@ const render = (vNode) => {
     const $child = render(child)
     $el.appendChild($child)
   }
-
   return $el
 }
 
