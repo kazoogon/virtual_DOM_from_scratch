@@ -1,6 +1,6 @@
-export default (tagNamge, {attrs, children}) => {
+export default (tagName, {attrs, children}) => {
   return {
-    tagNamge,
+    tagName,
     attrs,
     children
   }
