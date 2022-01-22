@@ -31,3 +31,9 @@ set actual DOM to target element in html file
 
 ▼ then we can see on browser    
 ![Screenshot 2022-01-22 at 01 18 42](https://user-images.githubusercontent.com/24407811/150616013-8c32588e-354c-4b3f-8b66-9adcf5549bb9.png)
+
+## ‼ Problem
+If I execute code which render every 1 sec, all elements re-render every sec as well    
+▼ look at that, input renders every second, so I cant write anything !!! 😱   
+![render_all](https://user-images.githubusercontent.com/24407811/150649956-1f47ac84-9b5e-44c5-ac15-db6a364b98b2.gif)    
+![everytime_render2](https://user-images.githubusercontent.com/24407811/150650070-43338571-d603-43d3-878e-6a7a48e2eb9c.gif)
