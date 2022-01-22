@@ -37,3 +37,8 @@ If I execute code which render every 1 sec, all elements re-render every sec as 
 ▼ look at that, input renders every second, so I cant write anything !!! 😱   
 ![render_all](https://user-images.githubusercontent.com/24407811/150649956-1f47ac84-9b5e-44c5-ac15-db6a364b98b2.gif)    
 ![everytime_render2](https://user-images.githubusercontent.com/24407811/150650070-43338571-d603-43d3-878e-6a7a48e2eb9c.gif)
+
+## ❓ How to solve it
+### diff.js       
+1, find different node between old virtual DOM and new virtual DOM      
+2, return function that the way how to change this node
