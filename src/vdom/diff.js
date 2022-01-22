@@ -1,12 +1,14 @@
 import render from "./render";
 
 const diffAttrs = (oldAttrs, newAttrs) => {
+  //it will be array of function [fn, fn, fn, fn .........], to change multiple attributes
+  // each function just execute "setAttribute" or "removeAttribute", simple
   const patches = []
 
   // set new attributes
   // (Object.entries => change object to array like [['name', 'kazu'], ['prefecture', 'LA']])
   for (const [k, v] of Object.entries(newAttrs)) {
-    patches.push($node=> {
+    patches.push($node => {
       $node.setAttribute(k, v)
       return $node
     })
@@ -30,7 +32,7 @@ const diffAttrs = (oldAttrs, newAttrs) => {
   }
 }
 
-const diff = (vOldNode, vNewNode)=> {
+const diff = (vOldNode, vNewNode) => {
   // if new node is empty, just remove it
   // 新しいノードが何もないなら、ただ消せばok
   if (vNewNode === undefined) {
