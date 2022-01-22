@@ -41,4 +41,24 @@ If I execute code which render every 1 sec, all elements re-render every sec as 
 ## ❓ How to solve it
 ### diff.js       
 1, find different node between old virtual DOM and new virtual DOM      
-2, return function that the way how to change this node
+2, return function the way how to change this node   
+    
+▼ now input doesnt render, so we can write normaly!!
+![not_render_input](https://user-images.githubusercontent.com/24407811/150653320-fa939086-953d-457e-9824-6ded8cb80bd6.gif)    
+![not_render2](https://user-images.githubusercontent.com/24407811/150653383-fd2215e2-2d9d-438c-9131-6aab1f9dca2f.gif)
+
+## 🌏 Others
+this algorithm of searching different node is **"stack"**, this is not used in current React.js.    
+this **"stack"** has problem which need to search different node recursively from top node.
+    
+Now algorithm is called **"Fiber"**. It is created by singly linked list, so it doesn't need to search different node recursively because each nodes are independent.   
+    
+[React Fiberの「Fiber」とはなんなのか勉強してみた](https://qiita.com/seya/items/a655adb340af3b6690b5)   
+[A deep dive into React Fiber internals
+](https://blog.logrocket.com/deep-dive-into-react-fiber-internals/)   
+
+## 📕 reference
+[VIDEO - Building a Simple Virtual DOM from Scratch - Jason Yu](https://www.youtube.com/watch?v=85gJMUEcnkc)    
+This video helped me sooooooooo much !!
+
+
