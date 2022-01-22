@@ -1,17 +1,17 @@
-# Build a Simple Virtual DOM from Scrath
+# 😛 Build a Simple Virtual DOM from Scrath
 ### To run
 ```
 $ npm install
 $ npm run dev
 ```
 
-## Side Notes
+## 🗒 Side Notes
 all variable with
 
 - $ - when referring to real doms, e.g ```$div, $el, $app```
 - v - when referring to virtual doms, e.g ```vDiv, vEl, vApp```
 
-## The way how to show on browser
+## 📺 The way how to show elements on browser
 
 ### 1. createElement.js
 just create object    
