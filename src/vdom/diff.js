@@ -1,5 +1,14 @@
 import render from "./render";
 
+const zip = (xs, ys) => {
+  const zipped = []
+  // Math.max(): get longer number
+  for (let i = 0; i<Math.max(xs.length, ys.length); i++) {
+    zipped.push([xs[i], ys[i]])
+  }
+  return zipped
+}
+
 const diffAttrs = (oldAttrs, newAttrs) => {
   //it will be array of function [fn, fn, fn, fn .........], to change multiple attributes
   // each function just execute "setAttribute" or "removeAttribute", simple
@@ -32,6 +41,39 @@ const diffAttrs = (oldAttrs, newAttrs) => {
   }
 }
 
+const diffChildren = (oldVChildren, newVChildren) => {
+  // compare new node and old node, but length of these nodes are different, so use longer one as the base
+  // 新しいノードと古いノードを比べたいが、２つのchildrenの数が違うかもしれないので、長いほうを基準にする
+  const childPatches = []
+  for (const [oldVChild, newVChild]  of zip(oldVChildren, newVChildren)) {
+    childPatches.push(diff(oldVChild, newVChild))
+  }
+
+  // if number of newVChildren is longer than oldVChildren, need to add new node
+  // 新しいノードの方が長い場合、appendChild()でそのノードを追加する関数patch funcとして追加
+  const additionalPatches = []// array of functions, which add new node which doesnt exist in old virtual element
+  for (const additionalVChild of newVChildren.slice(oldVChildren.length)) {
+    additionalPatches.push($node=> {
+      $node.appendChild(render(additionalVChild))
+      return $node
+    })
+  }
+
+  return $parent => {
+    for (const [patch, child] of zip(childPatches, $parent.childNodes)) {
+      patch(child)
+    }
+    for (const patch of additionalPatches) {
+      patch($parent)
+    }
+    return $parent
+  }
+}
+
+/**
+ * 1, find different node between old virtual DOM and new virtual DOM
+ * 2, return how to change this node of 1 as function
+ */
 const diff = (vOldNode, vNewNode) => {
   // if new node is empty, just remove it
   // 新しいノードが何もないなら、ただ消せばok
@@ -68,11 +110,11 @@ const diff = (vOldNode, vNewNode) => {
 
   // check attributes or children has changed or not
   const patchAttrs = diffAttrs(vOldNode.attrs, vNewNode.attrs)
-  // const patchChildren = diffChildren(vOldNode.children, vNewNode.children)
+  const patchChildren = diffChildren(vOldNode.children, vNewNode.children)
 
   return $node => {
     patchAttrs($node)
-    // patchChildren($node)
+    patchChildren($node)
     return $node
   }
 }

@@ -28,11 +28,14 @@ let $rootEl = mount($app, document.getElementById('app'))
 
 setInterval(() => {
   count++
+
+  // ▼ if you do like that, whole elements render
+  // $rootEl = mount(render(createVApp(count)), $rootEl)
+
   const vNewApp = createVApp(count)
   const patch = diff(vApp, vNewApp)
   $rootEl = patch($rootEl)
   vApp = vNewApp
-  // $rootEl = mount(render(createVApp(count)), $rootEl)
 }, 1000)
 
 console.log($app)
